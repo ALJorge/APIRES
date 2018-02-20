@@ -5,18 +5,18 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 const crypto = require('crypto')
 
-const UserSchema = new Scema({
+const UserSchema = new Schema({
   email: {type: String, unique: true, lowercase:true},
-  displayName: String;
+  displayName: String,
   avatar:String,
   password:{type:String,select:false},
   singupDate:{type:Date,default:Date.now()},
   lastLogin:Date
 })
 
-UserSchema.pre('save', (next) =>{
+UserSchema.pre('save', function(next) {
   let user = this
-  if (!user.isModified(password)) {
+  if (!user.isModified('password')) {
     return next()
   }
   bcrypt.genSalt(10, (err,salt) => {
@@ -44,4 +44,4 @@ UserSchema.methods.gravatar = function(){
 }
 
 
-mosule.exports = mongoose.model('user', UserSchema)
+module.exports = mongoose.model('user', UserSchema)
