@@ -19,6 +19,9 @@ app.use('/api', api)
 app.get('/login',(req,res) => {
   res.render('login')
 })
+app.get('/product',(req,res) => {
+  res.render('product')
+})
 /*
 app.get('/api/product/',  productControlles.getProducts())
 app.get('/api/product/:productID', productControlles.getProduct())
